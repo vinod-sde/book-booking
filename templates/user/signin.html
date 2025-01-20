@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      background-image: url(https://dg0lpj0xiisq5.cloudfront.net/assets/v1/authentication/background_books-cea9d1aee2ddd22a50736e54d6689f53a72589b55b8aa326ac3a32cada24535e.jpg);
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      margin: 0;
+      /* display: flex; */
+      justify-content: center;
+      align-items: center;
+    }
+
+    .navbar {
+      background-color: transparent;
+      color: #ffffff;
+      padding: 10px 20px;
+      width: 100%;
+      justify-content: end;
+
+    }
+
+    .hero-content {
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      margin-top: 100px;
+      /* Adjust margin as needed */
+      color: #ffffff;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 350px;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+
+    .fa-regular.fa-circle-xmark.fa-2xl {
+      font-size: 5em;
+      line-height: 1.03125em;
+      vertical-align: -.1875em;
+      margin-left: -100%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand-end" href="/">
+        <i class="fa-regular fa-circle-xmark fa-2xl" style="color: #f1b55d; "></i>
+      </a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-content">
+      <div class="card">
+        <form class="form-control card-body" method="POST">
+          {% csrf_token %}
+          {% if messages %}
+          <div class="form-control alert alert-primary" role="alert">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+          </div>
+          {% endif %}
+          <div class="form-control">
+            <img
+              src="https://dg0lpj0xiisq5.cloudfront.net/assets/v1/logo-d66e885305c022c01bba1b4a297d3a4b3a21cf598cf326b7afd5df72c42626a4.png"
+              alt="Logo" style="height:100px;width: 120px; margin-left: auto; margin-right: auto; display: block;">
+            <label class="label">
+              <span class="label-text"  >Enter your Email</span>
+            </label>
+            <input type="text" placeholder="email" name="username" class="input input-bordered" required  style="color: black;"/>
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Enter your Password</span>
+            </label>
+            <input type="password" placeholder="password" name="password" class="input input-bordered" required style="color: black;" />
+          </div>
+          <div class="form-control mt-6">
+            <button type="submit" class="btn" style="background-color: #f0b55d;">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script src="https://kit.fontawesome.com/7d74a01d8b.js" crossorigin="anonymous"></script>
+
+</html>

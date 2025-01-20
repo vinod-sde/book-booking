@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Register page</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    .bg-base-100 {
+      width: 350px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="hero min-h-screen" style="background-image: url(https://dg0lpj0xiisq5.cloudfront.net/assets/v1/authentication/background_books-cea9d1aee2ddd22a50736e54d6689f53a72589b55b8aa326ac3a32cada24535e.jpg);height: 953px;">
+    <div class="hero-overlay bg-opacity-60"></div>
+    <div class="hero-content text-center text-neutral-content" style="width: 500px;">
+      <div class="max-w-md">
+
+        <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100" style="width:350px">
+          <form class="card-body" method="POST">
+          {% csrf_token %}
+            
+            {% if messages %}
+            <div class=" form-control alert alert-primary" role="alert">
+              
+              {% for message in messages  %}
+                {{message}}
+              {% endfor %}
+              </div>
+            {% endif %}
+              
+            
+            <div class="form-control">
+              <img src="	https://dg0lpj0xiisq5.cloudfront.net/assets/v1/logo-d66e885305c022c01bba1b4a297d3a4b3a21cf598cf326b7afd5df72c42626a4.png" alt="" style="height:100px;width: 120px; margin-left: 75px;">
+              <label class="label">
+                <span class="label-text">Enter your Email</span>
+              </label>
+              <input style="color: black;"  type="email" placeholder="email" name="email" class="input input-bordered" required />
+            </div>
+            <div class="form-control">
+                <label class="label">
+                <span class="label-text">Enter your username </span>
+              </label>
+              <input style="color: black;"  type="text" placeholder="your username" name="username" class="input input-bordered" required />
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Enter your Password</span>
+              </label>
+              <input style="color: black;"  type="password" placeholder="password" name="password"  class="input input-bordered" required />
+
+            </div>
+            <div class="form-control">
+              <label class="label">
+                <span class="label-text">Confirm-your-Password</span>
+              </label>
+              <input style="color: black;" style="color:black"; type="password" placeholder="confirm-Password" name="password_re" class="input input-bordered" required />
+
+
+              </label>
+            </div>
+            <div class="form-control mt-6">
+              <button class="form-control btn" style="background-color: #f0b55d;">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

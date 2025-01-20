@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="./"> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Barlow', Arial, Helvetica, sans-serif;
+        }
+
+        @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css");
+
+        .header {
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            width: 100%;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            position: relative
+        }
+
+        .header__top {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            height: 80px
+        }
+
+        .header__top__container {
+            display: flex;
+            flex-direction: row;
+            max-width: 1240px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 15px;
+            position: relative
+        }
+
+        .header__bottom {
+            display: flex;
+            height: 54px;
+            background: #fcfcfc;
+            border-top: 1px solid #e5e5e5;
+            border-bottom: 1px solid #e5e5e5
+        }
+
+        .header__bottom__container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 15px;
+            max-width: 1200px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        @media (max-width: 700px) {
+            .header__bottom__container {
+                justify-content: center
+            }
+        }
+
+        .header__submenu {
+            flex-grow: 1;
+            display: flex;
+            align-items: center
+        }
+
+        @media (max-width: 700px) {
+            .header__submenu {
+                display: flex;
+                justify-content: center
+            }
+        }
+
+        .header__submenu__directories,
+        .header__submenu__link {
+            margin: 0 24px 2px 0;
+            text-decoration: none;
+            color: #333
+        }
+
+        @media (max-width: 700px) {
+            .header__submenu__directories {
+                display: none
+            }
+        }
+
+        .header__submenu__link {
+            display: inline-block
+        }
+
+        .header__submenu__link:hover {
+            color: #E7B366
+        }
+
+        .header__submenu__link--current {
+            position: relative;
+            font-weight: 500
+        }
+
+        .header__submenu__link--current:after {
+            content: "";
+            width: 100%;
+            height: 4px;
+            background-color: #E7B366;
+            display: block;
+            position: absolute;
+            bottom: -19px
+        }
+
+        .header__submenu__submit-quote {
+            margin-left: auto !important;
+            border-radius: 4px;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 40px;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #333 !important;
+            box-shadow: none;
+            background-color: transparent;
+            font-weight: 400;
+            padding: 0px 15px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ccc
+        }
+
+        .header__submenu__submit-quote:hover {
+            color: #333 !important;
+            box-shadow: none;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-color: #ccc
+        }
+
+        @media (max-width: 700px) {
+            .header__submenu__submit-quote {
+                float: none
+            }
+        }
+
+        .header__submenu span {
+            font-weight: 500
+        }
+
+        .header__column {
+            display: flex;
+            height: 100%;
+            align-items: center
+        }
+
+        .header__column--left {
+            justify-content: flex-start;
+            flex-grow: 1;
+            flex-basis: 50%;
+            flex-shrink: 0
+        }
+
+        .header__column--left .header__item {
+            padding-right: 40px
+        }
+
+        .header__column--center {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -55px;
+            width: 110px;
+            justify-content: center
+        }
+
+        .header__column--right {
+            justify-content: flex-end;
+            flex-grow: 1;
+            flex-basis: 50%;
+            flex-shrink: 0
+        }
+
+        .header__column--right .header__item {
+            padding-left: 50px
+        }
+
+        .header__item {
+            display: flex
+        }
+
+        @media (max-width: 900px) {
+            .header__item {
+                padding-left: 0 !important;
+                padding-right: 0 !important
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header__item--hide-mobile {
+                display: none
+            }
+        }
+
+        .header__item--show-mobile {
+            display: none
+        }
+
+        @media (max-width: 900px) {
+            .header__item--show-mobile {
+                display: block
+            }
+        }
+
+        .header__item--link a {
+            font-size: 18px;
+            line-height: 22px;
+            color: #555;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            padding: 0
+        }
+
+        .header__item--link a:hover {
+            color: #111
+        }
+
+        .header__item--link a i {
+            margin-right: 4px
+        }
+
+        .header__item--current-link a {
+            font-weight: 500;
+            position: relative;
+            color: #111
+        }
+
+        .header__item--current-link a:after {
+            content: "";
+            width: 100%;
+            height: 4px;
+            background-color: #E7B366;
+            display: block;
+            position: absolute;
+            bottom: -29px
+        }
+
+        .header__item__icon:before {
+            font-size: 85%;
+            display: inline-block;
+            margin-right: 5px;
+            color: #e7b366
+        }
+
+        .header__item__logo {
+            height: 100%;
+            justify-self: center
+        }
+
+        .header__item__logo img {
+            height: 70px
+        }
+
+        @media (max-width: 700px) {
+            .header__item__logo img {
+                height: 65px
+            }
+        }
+
+        .header__item--hamburger .hamburger {
+            padding-left: 0;
+            padding-right: 0
+        }
+
+        .header__item--upgrade {
+            padding-right: 15px
+        }
+
+        @media (max-width: 900px) {
+            .header__item--upgrade {
+                position: absolute;
+                top: 21px;
+                left: 15px
+            }
+        }
+
+        .header__item--upgrade .upgrade-modal__button {
+            border-radius: 4px;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 40px;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            background-color: transparent;
+            border: 0;
+            position: relative;
+            font-size: 18px !important;
+            color: #555
+        }
+
+        .header__item--upgrade .upgrade-modal__button:hover {
+            color: #111
+        }
+
+        .header__item--upgrade .upgrade-modal__button:before {
+            content: "👑";
+            margin-right: 5px
+        }
+
+        @media (max-width: 700px) {
+            .header__item--upgrade .upgrade-modal__button:before {
+                margin-right: 2px
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header__item--upgrade .upgrade-modal__button {
+                font-size: 14px !important;
+                padding: 0 10px;
+                border: 1px solid #ccc;
+                line-height: 36px
+            }
+        }
+
+        .header__item--my-lists {
+            padding-left: 20px !important
+        }
+
+        .header__item__button {
+            height: 45px;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            color: #333333;
+            font-size: 16px;
+            font-weight: 400;
+            height: 100%;
+            line-height: 40px;
+            padding: 0px 10px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap
+        }
+
+        .header__item__button:hover {
+            background-color: #d6d6d6
+        }
+
+        .header__item--sign-in {
+            padding-left: 15px !important
+        }
+
+        .header__item--sign-in a {
+            border-radius: 4px;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 40px;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #333 !important;
+            box-shadow: none;
+            background-color: transparent;
+            font-weight: 400;
+            padding: 0px 15px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #ccc
+        }
+
+        .header__item--sign-in a:hover {
+            color: #333 !important;
+            box-shadow: none;
+            background-color: rgba(0, 0, 0, 0.03);
+            border-color: #ccc
+        }
+
+        .header__item--sign-up {
+            padding-left: 15px !important
+        }
+
+        .header__item--sign-up a {
+
+            border-radius: 4px;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            line-height: 40px;
+            text-decoration: none;
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            color: #fff !important;
+            box-shadow: 0px 2px 5px 1px rgba(231, 179, 102, 0.72);
+            background-color: #E7B366;
+            font-weight: 600;
+            padding: 0px 30px;
+            border: 0
+        }
+
+        .header__item--sign-up a:hover {
+            color: #fff !important;
+            box-shadow: 0px 2px 5px 1px rgba(231, 179, 102, 0.72);
+            background-color: #c79953
+        }
+
+        .header__item__side-menu-button button {
+            outline: none
+        }
+
+        .container-section-1 {
+            background-image: url(https://dg0lpj0xiisq5.cloudfront.net/assets/v1/pages/home/hero_background-66057f873f0480f82b042f40a7e376b9dd080f305a80c24610d109dd3e593be6.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            overflow: hidden;
+            height: 532px;
+
+            display: flex;
+            flex-direction: column;
+
+            border: #ece5e5 solid;
+            background-color: #f0f1f4;
+            border: #ece5e5 solid;
+            text-align: center;
+            align-items: center;
+            margin-top: 8%;
+
+        }
+
+        .wrapper {
+            height: 8vh;
+            /* This part is important for centering */
+            display: grid;
+            place-items: center;
+        }
+
+        .typing-demo {
+            width: 100%;
+            animation: typing 5s steps(35), blink .5s step-end infinite alternate;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid transparent;
+
+            font-size: 2em;
+            font-family: Barlow, Helvetica, Arial, sans-serif;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: transparent;
+            }
+        }
+
+
+        .sub_text {
+            color: #4e4e4e;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 800px;
+            margin-bottom: 20px;
+        }
+
+        .container_search_logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 855px;
+            margin-top: 20px;
+            width: 912px;
+            /* margin-left: 27%; */
+            border: 3px solid #f0eded;
+            height: 91px;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .container_search_logo input[type="text"] {
+            flex: 1;
+            border: none;
+            font-size: 16px;
+            padding: 0 10px;
+            border-radius: 0;
+            background: transparent;
+            outline: none;
+            transition: border-color 0.3s ease-in-out;
+        }
+
+        .container_search_logo input[type="text"]:focus {
+            border-color: #c79953;
+            color: #c79953;
+        }
+
+        .search_icon {
+            background-image: url(https://dg0lpj0xiisq5.cloudfront.net/packs/static/frontend/v1/home_search_box/home_search_box__icon-5dc4da21aa74f3530768.png);
+            background-repeat: no-repeat;
+            height: 26px;
+            width: 26px;
+            margin-right: 10px;
+        }
+
+        #rolling_text {
+            color: #111;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 43px;
+            max-width: 600px;
+
+        }
+
+        @media (max-width: 1200px) {
+            .container-section-1 {
+                height: auto;
+                padding: 60px 15px;
+            }
+
+            .typing-demo {
+                font-size: 1.5em;
+            }
+
+            .sub_text {
+                font-size: 16px;
+            }
+
+            .container_search_logo {
+                height: 60px;
+            }
+
+            .search_icon {
+                height: 22px;
+                width: 22px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container-section-1 {
+                margin-top: 20px;
+            }
+        }
+
+
+        /* .container-section-2{
+            display: block;
+            height: 522.88px;
+            width: 1903px;
+            border: solid ;
+        }
+        .sub_conatiner{
+            
+            text-align: center;
+            width: 1200px;
+            height: 522.88px;
+            border: solid;
+            
+        } */
+        .container_section_2 {
+            font-family: Barlow, Arial, Helvetica, sans-serif;
+            padding: 60px 15px;
+            background-color: #fff;
+        }
+
+        .sub_container {
+            max-width: 1200px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sub_conatiner_titlee {
+            color: #111;
+            font-size: 36px;
+            font-weight: 600;
+            line-height: 43px;
+            text-align: center;
+            margin-top: 0;
+
+        }
+
+        .sub_container_2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+
+
+        }
+
+        .boxes {
+            color: #4e4e4e;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.5;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #c49e9e;
+            width: calc(25% - 30px);
+            height: 60px;
+            margin: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.03);
+            text-align: center;
+            box-sizing: border-box;
+
+        }
+
+        .boxes:hover {
+            border-color: #c79953;
+            color: #c79953;
+        }
+
+        @media (max-width: 1024px) {
+            .boxes {
+                flex-basis: calc(33.33% - 40px);
+                /* Adjust for 3 columns on smaller screens */
+                max-width: calc(33.33% - 40px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .boxes {
+                flex-basis: calc(50% - 40px);
+                /* Adjust for 2 columns on mobile */
+                max-width: calc(50% - 40px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .boxes {
+                flex-basis: calc(100% - 20px);
+                /* Full width on small screens */
+                max-width: calc(100% - 20px);
+            }
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Header -->
+    <div class="header" id="header">
+        <div class="header__top">
+            <div class="header__top__container">
+                <div class="header__column header__column--left">
+                    <div class="header__item header__item--link header__item--current-link header__item--hide-mobile">
+                        <a class="header__item__link" href="">Books</a>
+                    </div>
+
+
+
+                </div>
+
+                <div class="header__column header__column--center">
+                    <div class="header__item">
+                        <a class="header__item__logo" href="/"><img
+                                src="https://dg0lpj0xiisq5.cloudfront.net/assets/v1/logo-d66e885305c022c01bba1b4a297d3a4b3a21cf598cf326b7afd5df72c42626a4.png" /></a>
+                    </div>
+                </div>
+
+                <div class="header__column header__column--right">
+                    <div class="header__item header__item--hamburger header__item--show-mobile">
+                        <div class="header__side-menu-button" data-side-menu-trigger="true"></div>
+                        <div></div>
+                    </div>
+                    <div class="header__item header__item--sign-in header__item--hide-mobile">
+                        <a class="header__item__sign-in-button" data-click-action="track" data-event-category="Header"
+                            data-event-label="Sign In" data-event-action="click"
+                            href="/templates/user/signin.html#">Sign In</a>
+                    </div>
+                    <div class="header__item header__item--sign-up header__item--hide-mobile">
+                        <a class="header__item__sign-up-button" data-click-action="track" data-event-category="Header"
+                            data-event-label="Sign Up" data-event-action="click" href="/users/sign_in">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- title -->
+
+    <div><h1>Books with the subject: Science Fiction</h1></div>
+    <!-- Section 1 -->
+   <div class="row row-cols-1 row-cols-md-3 g-5 mt-5 ml-5
+   ">
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://m.media-amazon.com/images/M/MV5BMTY1MTIxMjg2Ml5BMl5BanBnXkFtZTgwMjUyNzgwMjE@._V1_.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">The Giver</h5>
+        <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias laboriosam harum blanditiis necessitatibus doloremque reiciendis?</p>
+      </div>
+      <div class="card-body">
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
